@@ -168,14 +168,14 @@ from #PercentPeopleVaccinated
 
 -- create viewing to store data for later viewing 
 
---Create View PercentagePeopleVaccinated as
+Create View PercentagePeopleVaccinated as
 
---select CD.continent, CD.location, CD.date, CD.population, 
-  --     CV.new_vaccinations,
-	--   SUM (convert(int,CV.new_vaccinations)) over (partition by CD.location order by CD.location ,CD.date) 
-	  -- as rollingPeopleVaccinated
---from ProtfolioProject..CovidVaccinations CV
+select CD.continent, CD.location, CD.date, CD.population, 
+       CV.new_vaccinations,
+	 SUM (convert(int,CV.new_vaccinations)) over (partition by CD.location order by CD.location ,CD.date) 
+	   as rollingPeopleVaccinated
+from ProtfolioProject..CovidVaccinations CV
 
---join ProtfolioProject..CovidDeaths CD
---on CD.location = CV.location
---AND CD.date = CV.date
+join ProtfolioProject..CovidDeaths CD
+on CD.location = CV.location
+AND CD.date = CV.date
